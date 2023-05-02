@@ -2,7 +2,71 @@
 #include <vector>
 #include <iostream>
 using namespace std;
-int main() 
+
+int main()
+{
+	const int NUM_SCORES = 4;
+	int score;
+
+	vector<int>::const_iterator iter;
+	vector<int> scores;
+
+	for (int i = 0; i<NUM_SCORES;i++)
+	{
+		cout << "Score " << i + 1 << endl;
+		cin >> score;
+		scores.push_back(score); 
+	}
+
+	for (iter = scores.begin(); iter != scores.end(); iter++)
+	{
+		cout << *iter << endl;
+	}
+}
+
+
+
+
+void vectorReserve()
+{
+	vector<int>scores(10, 0);
+	cout << "Vector size is: " << scores.size() << endl;
+	cout << "Vector capacity is: " << scores.capacity() << endl;
+	scores.reserve(40);
+	scores.push_back(0);
+	cout << "Vector size is: " << scores.size() << endl;
+	cout << "Vector capacity is: " << scores.capacity() << endl;
+
+	scores.push_back(0);
+	scores.push_back(3);
+	scores.push_back(3);
+	scores.push_back(3);
+	
+	scores.push_back(3);
+
+	cout << "Vector size is: " << scores.size() << endl;
+	cout << "Vector capacity is: " << scores.capacity() << endl;
+
+	scores.reserve(40);
+	cout << "Vector size is: " << scores.size() << endl;
+	cout << "Vector capacity is: " << scores.capacity() << endl;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void vectorsPart1() 
 	{
 	int TamMochila = 0;
 	vector<string> invent;
