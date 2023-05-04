@@ -3,10 +3,127 @@
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
-
 using namespace std;
 
+
 int main()
+{
+	vector<string> WordGame = { "Computadora", "Hogar", "Inglaterra" };
+	string Word1 = WordGame[0];
+	string Answer1;
+	string Word2 = WordGame[1];
+	string Answer2;
+	string Word3 = WordGame[2];
+	string Answer3;
+	int Vidas = 3;
+	bool Continue1 = false;
+	bool Continue2 = false;
+	bool Continue3 = false;
+	srand(time(NULL));
+	do
+	{
+		if (Vidas == 0)
+		{
+			cout << "Te quedaste sin vidas" << endl;
+			return 0;
+		}
+	cout << "Adivina la palabra que la computadora ha mezclado tienes "<<Vidas<<" vidas" << endl;
+	
+		cout << "Primera palabra" << endl;
+		random_shuffle(Word1.begin(), Word1.end());
+		cout << Word1 << endl;
+		cin >> Answer1;
+
+		
+
+		if (Answer1 == WordGame[0])
+		{
+			cout << "Correcto!" << endl;
+			cout << "Pasaras a la siguiente palabra" << endl;
+			Continue1 = true;
+		}
+		
+		else
+		{
+			cout << "Incorrecto" << endl;
+			Vidas--;
+		}
+		
+
+
+	} while (Continue1 == false);
+
+	do
+	{
+		if (Vidas == 0)
+		{
+			cout << "Te quedaste sin vidas" << endl;
+			return 0;
+		}
+
+		cout << "Segunda palabra. Tienes " <<Vidas<<" vidas"<< endl;
+		random_shuffle(Word2.begin(), Word2.end());
+		cout << Word2 << endl;
+		cin >> Answer2;
+
+		
+
+		if (Answer2 == WordGame[1])
+		{
+			cout << "Correcto!" << endl;
+			cout << "Pasaras a la siguiente palabra" << endl;
+			Continue2 = true;
+		}
+
+		else
+		{
+			cout << "Incorrecto" << endl;
+			Vidas--;
+		}
+
+
+
+	} while (Continue2 == false);
+
+	do
+	{
+		if (Vidas == 0)
+		{
+			cout << "Te quedaste sin vidas" << endl;
+			return 0;
+		}
+
+		cout << "Segunda palabra. Tienes " << Vidas << " vidas" << endl;
+		random_shuffle(Word3.begin(), Word3.end());
+		cout << Word3 << endl;
+		cin >> Answer3;
+
+
+
+		if (Answer3 == WordGame[2])
+		{
+			cout << "Correcto!" << endl;
+			cout << "GANASTE!!!!!!!!!" << endl;
+			Continue3 = true;
+		}
+
+		else
+		{
+			cout << "Incorrecto" << endl;
+			Vidas--;
+		}
+
+
+
+	} while (Continue3 == false);
+}
+
+
+
+
+
+
+void IteratorFindShuffleSort()
 {
 	const int NUM_SCORES = 4;
 	int score;
