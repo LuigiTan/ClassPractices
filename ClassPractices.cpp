@@ -1,6 +1,9 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <algorithm>
+#include <cstdlib>
+
 using namespace std;
 
 int main()
@@ -11,13 +14,60 @@ int main()
 	vector<int>::const_iterator iter;
 	vector<int> scores;
 
-	for (int i = 0; i<NUM_SCORES;i++)
+	for (int i = 0; i < NUM_SCORES; i++)
 	{
 		cout << "Score " << i + 1 << endl;
 		cin >> score;
-		scores.push_back(score); 
+		scores.push_back(score);
+	}
+	cout << "Puntajes" << endl;
+	for (iter = scores.begin(); iter != scores.end(); iter++)
+	{
+		cout << *iter << endl;
+	}
+	/*Find*/
+	cout << "Buscar puntajes" << endl;
+	cin >> score;
+	//Desde donde buscas, hasta donde y que es lo que buscas
+	iter = find(scores.begin(), scores.end(), score);
+	//Si llega al final y no encuentra el score, agarra el del final
+	if (iter != scores.end())
+	{
+		cout << "\nTu puntaje se encuentra en el vector\n";
+	}
+	else
+	{
+		cout << "\n No encontramos el puntaje que buscas\n";
 	}
 
+	/*Random Shuffle*/
+
+	srand(time(NULL));
+	random_shuffle(scores.begin(), scores.end());
+
+	cout << "\n Scores Mezclados\n";
+	for (iter = scores.begin(); iter != scores.end(); iter++)
+	{
+		cout << *iter << endl;
+	}
+
+	//Shuffle String
+	string word = "espejo";
+	random_shuffle(word.begin(), word.end());
+	cout << word << endl;
+
+
+
+	/*Sort*/
+	cout << "\nCambiar orden\n";
+	sort(scores.begin(), scores.end());
+	for (iter = scores.begin(); iter != scores.end(); iter++)
+	{
+		cout << *iter << endl;
+	}
+
+	cout << "\nCambiar orden greater\n";
+	sort(scores.begin(), scores.end(), greater<int>());
 	for (iter = scores.begin(); iter != scores.end(); iter++)
 	{
 		cout << *iter << endl;
