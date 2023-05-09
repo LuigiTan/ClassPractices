@@ -5,8 +5,58 @@
 #include <cstdlib>
 using namespace std;
 
-
 int main()
+{
+	vector <string> inventory;
+	inventory.push_back("Espada");
+	inventory.push_back("Escudo");
+	inventory.push_back("Martillo");
+	inventory.push_back("Rifle");
+
+	vector<string>::iterator myIterator;
+	vector<string>::const_iterator iter;
+
+	cout << "\n Tus Items: \n";
+	for (iter = inventory.begin(); iter != inventory.end(); iter++)
+	{
+		cout << *iter << endl;
+	}
+	//Intercambiar
+	cout << "\n Intercambiaste tu " << inventory[2] << " por un arco";
+	myIterator = inventory.begin() + 2;
+	*myIterator = "Arco";
+	cout << "\nTus Items: \n";
+	for (iter = inventory.begin(); iter != inventory.end(); iter++)
+	{
+		cout << *iter << endl;
+	}
+
+	//SIZE
+	cout << "\n El nombre del item " << *myIterator << " tiene ";
+	cout << (*myIterator).size() << " letras";
+
+	cout << "\n El nombre del item " << *myIterator << " tiene ";
+	cout << (myIterator)->size() << " letras";
+
+	//INSERT
+	cout << "Recuperaste la bomba robada ";
+	inventory.insert(inventory.begin() + 4, "bomba");
+	cout << "\nTus Items: \n";
+	for (iter = inventory.begin(); iter != inventory.end(); iter++)
+	{
+		cout << *iter << endl;
+	}
+	//DELETE
+	cout << "\nTu " << inventory[1] << " fue destruido en batalla.";
+	inventory.erase(inventory.begin() + 1);
+	cout << "\nTus Items: \n";
+	for (iter = inventory.begin(); iter != inventory.end(); iter++)
+	{
+		cout << *iter << endl;
+	}
+}
+
+int WordGame()
 {
 	vector<string> WordGame = { "Computadora", "Hogar", "Inglaterra" };
 	string Word1 = WordGame[0];
