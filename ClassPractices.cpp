@@ -3,8 +3,63 @@
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
+#include <windows.h>
 using namespace std;
+void BADScoreSwap(int Value1, int Value2);
+void ScoreSwap(int& Value1, int& Value2);
+
+
 int main()
+{
+	int Score1 = 0; 
+	int Score2 = 0;
+
+	cout << "introduce el primer score" << endl;
+	cin >> Score1;
+	cout << "introduce el segundo score" << endl;
+	cin >> Score2;
+	cout << "Estos son los scores\n" << Score1 << "\n" << Score2 << endl;
+	cout << "Usando un Swap malo" << endl;
+	BADScoreSwap(Score1, Score2);
+	Sleep(500);
+	cout << "Estos son los scores\n" << Score1 << "\n" << Score2 << endl;
+	Sleep(1000);
+	ScoreSwap(Score1, Score2);
+	cout << "Iniciando el buen Swap." << endl;
+	Sleep(1000);
+	cout << "Cambiando";
+	Sleep(500);
+	cout << ".";
+	Sleep(500);
+	cout << ".";
+	Sleep(500);
+	cout << ".";
+	Sleep(500);
+	cout << ".";
+	Sleep(500);
+	cout<<"\nEstos son los nuevos Scores\n"<< Score1 << "\n" << Score2 << endl;
+
+
+}
+void ScoreSwap(int & Value1, int & Value2)//Los amperson son necesarios para que el valor cambiado dentro de la funcion se aplique al resto del codigo
+{
+	int TempValue = Value1; // TempValue se vuelve el valor del Value1 (Score1)
+	Value1 = Value2;
+	Value2 = TempValue;
+
+}
+void BADScoreSwap(int Value1, int Value2)
+{
+	int TempValue = Value1; // TempValue se vuelve el valor del Value1 (Score1)
+	Value1 = Value2;
+	Value2 = TempValue;
+
+}
+
+
+
+
+void GuessTheWord()
 {
 	const int MAX_ATTEMPTS = 3;
 	int attempts = 0;
