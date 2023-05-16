@@ -5,11 +5,34 @@
 #include <cstdlib>
 #include <windows.h>
 using namespace std;
+//References
 void BADScoreSwap(int Value1, int Value2);
 void ScoreSwap(int& Value1, int& Value2);
-
+void display(const vector<string>& vec);
 
 int main()
+{
+	vector<string> inventory;
+
+	inventory.push_back("sword");
+	inventory.push_back("armor");
+	inventory.push_back("gun");
+
+	display(inventory);
+
+
+
+}
+void display(const vector<string>& vec)
+{
+	vector<string>::const_iterator iter;
+	for (iter = vec.begin(); iter != vec.end(); iter++)
+	{
+		cout << *iter << endl;
+	}
+}
+
+void swap()
 {
 	int Score1 = 0; 
 	int Score2 = 0;
