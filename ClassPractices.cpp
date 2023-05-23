@@ -12,6 +12,102 @@ void display(const vector<string>& vec);
 
 int main()
 {
+	const int ROWS = 10;
+	const int COLUMNS = 10;
+
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLUMNS; j++)
+		{
+			if (i == 0||i==(ROWS-1))
+			{
+				cout << " 1 ";
+			}
+			else if (j == 0 || j == (COLUMNS - 1))
+			{
+				cout << " 1 ";
+			}
+			else
+			{
+				cout << " 0 ";
+			}
+			
+		}
+		cout << "\n";
+	}
+	cout << "\n" << "\n";
+
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLUMNS; j++)
+		{
+			if (i == 0 || i == (ROWS - 1))
+			{
+				cout << " 1 ";
+			}
+			else if (j == 0 || j == (COLUMNS - 1))
+			{
+				cout << " 1 ";
+			}
+			else if (j == i)
+			{
+				cout << " 1 ";
+			}
+			else
+			{
+				cout << " 0 ";
+			}
+
+		}
+		cout << "\n";
+	}
+	cout << "\n" << "\n";
+
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLUMNS; j++)
+		{
+			if (i == 0 || i == (ROWS - 1))
+			{
+				cout << " 1 ";
+			}
+			else if (j == 0 || j == (COLUMNS - 1))
+			{
+				cout << " 1 ";
+			}
+			else if (j == i)
+			{
+				cout << " 1 ";
+			}
+			else if (j == (COLUMNS - i - 1))
+			{
+				cout << " 1 ";
+			}
+			else
+			{
+				cout << " 0 ";
+			}
+
+		}
+		cout << "\n";
+	}
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+void inventoryDisplay()
+{
 	vector<string> inventory;
 
 	inventory.push_back("sword");
