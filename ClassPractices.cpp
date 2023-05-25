@@ -12,6 +12,44 @@ void display(const vector<string>& vec);
 
 int main()
 {
+	const int HIGHT_WIDTH = 3;
+	const int ROWS = 3;
+	const int COLUMNS = 3;
+
+	char board[ROWS][COLUMNS] = { {'o', 'x', 'o'},
+								  {' ', 'x', 'x'},
+								  {'x', 'o', 'o'} };
+
+	cout << "---TIC TAC TOE--- \n";
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLUMNS; j++)
+		{
+			cout << board[i][j];
+		}
+		cout << endl;
+	}
+	board[1][1] = 'x';
+
+	cout << "---TIC TAC TOE---\n";
+	
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLUMNS; j++)
+		{
+			cout << board[i][j];
+		}
+		cout << endl;
+	}
+
+	cout << "\n X wins!!\n";
+
+
+}
+
+
+void MatrixBox()
+{
 	const int ROWS = 10;
 	const int COLUMNS = 10;
 
