@@ -4,13 +4,175 @@
 #include <algorithm>
 #include <cstdlib>
 #include <windows.h>
+#include <clocale>
 using namespace std;
+
+int askNumber(string question, int high, int low = 1);
+
+
+//Exam P2
+string GetRandomItem(vector<string>& items);
+void DisplayInventory(vector<string>& inventory);
+bool AskYesNo(string question);
+void ReplaceItem(int& replace);
+void BuySpace(unsigned int& gems, vector<string>& inventoryBought, string& itemReplace);
+void ShowMenu();
+
+const int MAX_ITEMS = 6;
+const int SPACE_COST = 6;
+const int FREE_ITEMS = 3;
+
+
 //References 1111
 void BADScoreSwap(int Value1, int Value2);
 void ScoreSwap(int& Value1, int& Value2);
+
 void display(const vector<string>& vec);
 
+
+
+
 int main()
+{
+	std::setlocale(LC_ALL, "es_ES.UTF-8");
+	unsigned int gems = 8;
+
+	//Items
+	vector<string> items = { "espada", "martillo", "bomba", "escudo" };
+
+	//inventory
+	vector<string> inventory;
+	inventory.reserve(MAX_ITEMS);
+	vector<string>::const_iterator iter;
+	bool isContinue;
+	int replace = 0;
+
+	do {
+		cout << "\n--INVENTARIO---\n";
+		cout << "Gemas: " << gems << endl;
+
+		string itemFound = GetRandomItem(items);
+
+		cout << "Has encontrado un(a) " << itemFound << "!!\n";
+
+		if (inventory.size() >= FREE_ITEMS)
+		{
+			ShowMenu();
+			int option = askNumber("\nElige un número ", 3);
+
+			switch (option)
+			{
+			case 1:
+				cout << "Que Item deseas reemplazar?"<<endl;
+				DisplayInventory(inventory);/////Tengo que meter la mayoria de lo de este caso a la funcion 
+				ReplaceItem(replace);
+				inventory[replace] = itemFound;
+				break;
+			case 3:
+				DisplayInventory(inventory);
+				BuySpace(gems, inventory, itemFound);
+				break;
+			default:
+				break;
+			}
+		}
+		else
+		{
+			inventory.push_back(itemFound);
+		}
+
+
+
+		//DisplayItems
+		DisplayInventory(inventory);
+
+		isContinue = AskYesNo("¿Seguir explorando?");
+
+	} while (isContinue);
+
+	cout << "\nVuelve pronto!!\n";
+
+}
+
+void ReplaceItem(int & replace)
+{
+	
+	cin >> replace;
+	cout << "INVENTARIO ACTUALIZADO:" << endl;
+}
+
+void BuySpace(unsigned int& gems, vector<string>& inventoryBought, string& itemReplace)
+{
+	cout << "Un nuevo espacio en el inventario cuesta " << SPACE_COST << " gemas" << endl;
+	if (gems > SPACE_COST)
+	{
+		AskYesNo("Tienes suficientes gemas para comprar un nuevo espacio\n ¿Deseas comprar un nuevo espacio?\n");
+		gems = gems - SPACE_COST;
+		cout << "Transaccion completada, haz compradu un nuevo espacio\n";
+		inventoryBought.push_back(itemReplace);
+	}
+	else
+	{
+		cout << "Tristemente, no tienes suficientes gemas para comprar mas espacio\n";
+	}
+
+}
+
+string GetRandomItem(vector<string>& items)
+{
+	srand(time(NULL));
+	int itemRandomIndex = (rand() % items.size());
+	string itemSelected = items[itemRandomIndex];
+
+	return itemSelected;
+}
+
+void DisplayInventory(vector<string>& inventory)
+{
+	vector<string>::const_iterator iter;
+	int i = 0;
+	cout << "\n--Tus items--\n";
+	for (iter = inventory.begin(); iter != inventory.end(); iter++)
+	{
+		cout << i << ".- " << *iter << endl;
+		i++;
+	}
+
+}
+
+bool AskYesNo(string question)
+{
+	char answer;
+
+	do {
+		cout << "\n" << question << "(y/n)";
+		cin >> answer;
+	} while (answer != 'y' && answer != 'n');
+
+	if (answer == 'y')
+	{
+		return true;
+	}
+
+	return false;
+}
+
+void ShowMenu()
+{
+	cout << "\nYa no tienes espacio para más objetos, que te gustaría hacer:\n";
+	cout << "\n1. Reemplazar objeto.";
+	cout << "\n2. Continuar sin el objeto.";
+	cout << "\n3. Comprar un espacio por " << SPACE_COST << " gemas.";
+}
+
+
+
+
+
+
+
+
+void TictactoePart1()
 {
 	const int HIGHT_WIDTH = 3;
 	const int ROWS = 3;
@@ -46,6 +208,8 @@ int main()
 
 
 }
+
+
 
 
 void MatrixBox()
@@ -136,10 +300,6 @@ void MatrixBox()
 
 
 }
-
-
-
-
 
 
 
@@ -544,16 +704,6 @@ void vectorReserve()
 
 
 
-
-
-
-
-
-
-
-
-
-
 void vectorsPart1() 
 	{
 	int TamMochila = 0;
@@ -658,3 +808,14 @@ void vectorsPart1()
 
 
 
+int askNumber(string question, int high, int low)
+	{
+		int number = 0;
+
+		do {
+			cout << question << "entre " << low << " y " << high << endl;
+			cin >> number;
+		} while (number > high || number < low);
+
+		return number;
+	}
