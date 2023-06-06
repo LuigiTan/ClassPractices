@@ -17,6 +17,10 @@ bool AskYesNo(string question);
 void ReplaceItem(int& replace);
 void BuySpace(unsigned int& gems, vector<string>& inventoryBought, string& itemReplace);
 void ShowMenu();
+//Exam ProfExample
+void BuySpaceEx(vector<string>& inventory, unsigned int& gems, string itemFound);
+void ReplaceItemEx(vector<string>& inventory, string itemFound);
+
 
 const int MAX_ITEMS = 6;
 const int SPACE_COST = 6;
@@ -29,10 +33,90 @@ void ScoreSwap(int& Value1, int& Value2);
 
 void display(const vector<string>& vec);
 
-
-
-
 int main()
+{
+	std::setlocale(LC_ALL, "es_ES.UTF-8");
+	unsigned int gems = 8;
+
+	//Items
+	vector<string> items = { "espada", "martillo", "bomba", "escudo" };
+
+	//inventory
+	vector<string> inventory;
+	inventory.reserve(MAX_ITEMS);
+	vector<string>::const_iterator iter;
+	bool isContinue;
+
+	do {
+		cout << "\n--INVENTARIO---\n";
+		cout << "Gemas: " << gems << endl;
+
+		string itemFound = GetRandomItem(items);
+
+		cout << "Has encontrado un(a) " << itemFound << "!!\n";
+
+		if (inventory.size() >= FREE_ITEMS)
+		{
+			ShowMenu();
+			int option = askNumber("\nElige un numero ", 3);
+
+			switch (option)
+			{
+			case 1:
+				ReplaceItemEx(inventory, itemFound);
+				break;
+			case 3:
+				BuySpaceEx(inventory, gems, itemFound);
+				break;
+			default:
+				break;
+			}
+		}
+		else
+		{
+			inventory.push_back(itemFound);
+		}
+
+
+
+		//DisplayItems
+		DisplayInventory(inventory);
+
+		isContinue = AskYesNo("¿Seguir explorando?");
+
+	} while (isContinue);
+
+	cout << "\nVuelve pronto!!\n";
+
+}
+
+void BuySpaceEx(vector<string>& inventory, unsigned int& gems, string itemFound)
+{
+	if (gems >= SPACE_COST)
+	{
+		cout << "\n Espacio comprado con éxito!!\n";
+		inventory.push_back(itemFound);
+		gems -= SPACE_COST;
+	}
+	else
+	{
+		cout << "\nNo tienes gemas suficientes!!\n";
+	}
+}
+
+void ReplaceItemEx(vector<string>& inventory, string itemFound)
+{
+	vector<string>::iterator iter;
+	int itemChosen = 0;
+	cout << "\n¿Qué item deseas reemplazar?\n";
+	DisplayInventory(inventory);
+	cin >> itemChosen;
+	iter = inventory.begin() + itemChosen;
+	*iter = itemFound;
+}
+
+								///PRACTICA DEL EXAMEN/////
+void ExamenPractica()
 {
 	std::setlocale(LC_ALL, "es_ES.UTF-8");
 	unsigned int gems = 8;
@@ -139,6 +223,8 @@ void DisplayInventory(vector<string>& inventory)
 	}
 
 }
+
+							//FIN DE LA PRACTICA DEL EXAMEN///
 
 bool AskYesNo(string question)
 {
@@ -375,7 +461,6 @@ void BADScoreSwap(int Value1, int Value2)
 
 
 
-
 void GuessTheWord()
 {
 	const int MAX_ATTEMPTS = 3;
@@ -432,7 +517,6 @@ void GuessTheWord()
 		cout << "\nMUY BIEN!! Lo hiciste en: " << attempts + 1 << " intentos. ";
 	}
 }
-
 
 
 
@@ -809,13 +893,32 @@ void vectorsPart1()
 
 
 int askNumber(string question, int high, int low)
-	{
-		int number = 0;
+{
+	string input;
+	bool isValid = false;
+	//int number = 0;
 
-		do {
-			cout << question << "entre " << low << " y " << high << endl;
-			cin >> number;
-		} while (number > high || number < low);
+	do {
+		cout << question << "entre " << low << " y " << high << endl;
+		cin>> input;
 
-		return number;
-	}
+		for (char c: input)
+		{
+			if (!isdigit(c))
+			{
+				isValid = false;
+				cout << "Test\n";
+				break;
+			}
+			cout << "Test2\n";
+		}
+		if (!isValid)///Lo mismo que if(isvalid == false)
+		{
+			cout << "\nEntrada invalida, porfavor elige solo numeros.\n";
+		}
+
+	} while (!isValid || input.empty());
+		//number > high || number < low);
+
+	return stoi(input);
+}
