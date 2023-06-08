@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <windows.h>
 #include <clocale>
+#include <limits>
 using namespace std;
 
 int askNumber(string question, int high, int low = 1);
@@ -187,6 +188,7 @@ void ReplaceItem(int & replace)
 
 void BuySpace(unsigned int& gems, vector<string>& inventoryBought, string& itemReplace)
 {
+
 	cout << "Un nuevo espacio en el inventario cuesta " << SPACE_COST << " gemas" << endl;
 	if (gems > SPACE_COST)
 	{
@@ -900,21 +902,31 @@ int askNumber(string question, int high, int low)
 
 	do {
 		cout << question << "entre " << low << " y " << high << endl;
-		cin>> input;
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		getline(cin, input);
+		//cin>> input;
 
 		for (char c: input)
 		{
-			if (!isdigit(c))
+			if (isdigit(c))
 			{
-				isValid = false;
-				cout << "Test\n";
+				isValid = true;
+				cout << "Test, The input is valid\n";
 				break;
 			}
-			cout << "Test2\n";
+			cout << "Test, outside the if\n";
 		}
 		if (!isValid)///Lo mismo que if(isvalid == false)
 		{
 			cout << "\nEntrada invalida, porfavor elige solo numeros.\n";
+		}
+		else if (isValid)
+		{
+			if (stoi(input) < low || stoi(input) > high)
+			{
+				cout << "Numero muy bajo o muy alto, introduce otro numero" << endl;
+				isValid = false;
+			}
 		}
 
 	} while (!isValid || input.empty());
