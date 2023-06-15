@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <clocale>
 #include <limits>
+#include <cctype>
 using namespace std;
 
 int askNumber(string question, int high, int low = 1);
@@ -902,7 +903,7 @@ int askNumber(string question, int high, int low)
 
 	do {
 		cout << question << "entre " << low << " y " << high << endl;
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		getline(cin, input);
 		//cin>> input;
 
